@@ -1,0 +1,27 @@
+server:
+  port: 8080
+  tomcat:
+    accesslog:
+      enabled: true
+      directory: ${user.dir}/logs
+      buffered: false
+      pattern: '%{X-Forwarded-For}i %h %l %u %t %T "%r" %s %b'
+      prefix: access.${HOSTNAME:localhost}.${server.port}
+      suffix: .log
+      file-date-format: .yyyy-MM-dd
+
+logging:
+  file: logs/process.${HOSTNAME:localhost}.${server.port}
+  level:
+    com:
+      taikang:
+        tlife: debug
+spring:
+  redis:
+    host: 10.130.209.77
+    database: 0
+  data:
+    elasticsearch: #ElasticsearchProperties
+      cluster-name: elasticsearch #默认即为elasticsearch
+      cluster-nodes: 127.0.0.1:9300 #配置es节点信息，逗号分隔，如果没有指定，则启动ClientNode
+
